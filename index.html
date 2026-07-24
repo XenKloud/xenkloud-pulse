@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Xenkloud Pulse — Know where your cloud bill is actually going</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
   :root {
     --ink: #14161B;
-    --gray: #6B7280;
+    --gray: #5B5F6B;
     --gray-light: #9CA3AF;
     --line: #ECEDF1;
     --card: #FFFFFF;
-    --orange: #F0642F;
-    --orange-hover: #DB5423;
+    --orange: #DD7A33;
+    --orange-hover: #C86A28;
     --blue: #3B82F6;
     --teal: #14B8A6;
-    --bg-a: #FDEDE9;
-    --bg-b: #E7F0FB;
+    --grad-a: #F4B8A6;
+    --grad-b: #A9E1D2;
   }
 
   * { box-sizing: border-box; }
@@ -26,75 +26,92 @@
   body {
     font-family: 'Inter', -apple-system, sans-serif;
     color: var(--ink);
-    background: linear-gradient(120deg, var(--bg-a) 0%, #FBF6F5 35%, #F3F6FA 65%, var(--bg-b) 100%);
-    min-height: 100vh;
+    background: #FFFFFF;
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
-  /* Nav */
+  /* Hero band — full-bleed gradient, everything else sits on white */
+  .hero-band {
+    background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%);
+    padding-bottom: 50px;
+  }
+
+  /* Nav — transparent, sits directly on the gradient */
   nav {
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
-    border-radius: 16px; margin: 20px auto 0; max-width: 1180px;
-    padding: 14px 22px; box-shadow: 0 2px 16px rgba(20,22,27,0.05);
+    padding: 26px 0 0;
   }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+  .nav-left { display: flex; align-items: center; gap: 34px; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 18px; letter-spacing: -0.3px; }
   .logo .badge {
-    background: #E9F1FE; color: var(--blue); font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,0.6); color: var(--ink); font-size: 12px; font-weight: 600;
     padding: 3px 10px; border-radius: 999px; margin-left: 2px;
   }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; opacity: 0.75;
+    display: flex; align-items: center; gap: 4px; cursor: pointer;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 16px); left: -14px;
+    background: white; border-radius: 14px; box-shadow: 0 12px 32px rgba(20,22,27,0.14);
+    padding: 10px; width: 300px; border: 1px solid var(--line); z-index: 60;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-item { display: flex; gap: 12px; padding: 10px; border-radius: 10px; text-decoration: none; color: var(--ink); }
+  .dropdown-item:hover { background: #F7F8FA; }
+  .dropdown-item .di-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .dropdown-item .di-title { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; }
+  .dropdown-item .di-desc { font-size: 12px; color: var(--gray); line-height: 1.4; }
+
   .btn {
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
-    padding: 11px 20px; border-radius: 10px; text-decoration: none; display: inline-block;
-    border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
+    padding: 12px 24px; border-radius: 999px; text-decoration: none; display: inline-block;
+    border: 1px solid transparent; cursor: pointer; transition: transform .15s ease;
   }
   .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--orange); color: white; box-shadow: 0 6px 16px rgba(240,100,47,0.28); }
+  .btn-primary { background: var(--orange); color: white; box-shadow: 0 8px 20px rgba(221,122,51,0.3); }
   .btn-primary:hover { background: var(--orange-hover); }
-  .btn-secondary { background: white; color: var(--ink); border-color: var(--line); }
+  .btn-secondary { background: rgba(255,255,255,0.7); color: var(--ink); border-color: rgba(20,22,27,0.1); }
 
   /* Hero */
-  header.hero { position: relative; padding: 80px 0 40px; text-align: center; overflow: visible; }
-  .hero-deco { position: absolute; top: 60px; width: 150px; height: 100px; background: white; border-radius: 14px; box-shadow: 0 12px 30px rgba(20,22,27,0.08); }
-  .hero-deco.left { left: 0; }
-  .hero-deco.right { right: 0; }
-
-  h1 { font-size: 46px; font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 20px; }
-  h1 .grad { background: linear-gradient(90deg, var(--blue), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .sub { font-size: 16px; color: var(--gray); max-width: 560px; margin: 0 auto 30px; line-height: 1.6; }
-  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-
-  /* Stats strip */
-  .stats {
-    background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(20,22,27,0.05);
-    display: flex; justify-content: center; padding: 22px 10px; margin-bottom: 56px; flex-wrap: wrap;
+  header.hero { position: relative; padding: 56px 0 30px; text-align: center; }
+  h1 {
+    font-size: 50px; font-weight: 800; line-height: 1.12; letter-spacing: -1px; margin: 0 0 20px;
+    color: var(--ink);
   }
-  .stat { display: flex; align-items: center; gap: 12px; padding: 6px 34px; border-right: 1px solid var(--line); }
-  .stat:last-child { border-right: none; }
-  .stat .icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .stat b { font-size: 15px; display: block; }
+  h1 .grad { background: linear-gradient(90deg, var(--blue), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { font-size: 16.5px; color: var(--gray); max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
+
+  /* Pill stats row — plain, no card, sits directly on gradient */
+  .stats { display: flex; justify-content: center; gap: 44px; flex-wrap: wrap; }
+  .stat { display: flex; align-items: center; gap: 10px; }
+  .stat .icon { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,0.55); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .stat b { font-size: 14.5px; display: block; }
   .stat span { font-size: 12.5px; color: var(--gray); }
 
-  /* Problem section */
-  .problem-grid { display: grid; grid-template-columns: 0.85fr 2fr; gap: 28px; align-items: start; margin-bottom: 64px; }
+  /* Problem section (on white) */
+  .content-section { padding: 60px 0; }
+  .problem-grid { display: grid; grid-template-columns: 0.85fr 2fr; gap: 28px; align-items: start; }
   .problem-grid h2 { font-size: 24px; font-weight: 800; margin: 0 0 12px; line-height: 1.3; }
   .problem-grid p { color: var(--gray); font-size: 14px; line-height: 1.6; margin: 0; }
   .feature-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .fcard {
-    background: white; border-radius: 14px; padding: 18px; box-shadow: 0 2px 12px rgba(20,22,27,0.04);
-  }
+  .fcard { background: #FAFAFB; border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
   .fcard .icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
   .fcard h3 { font-size: 13.5px; font-weight: 700; margin: 0 0 6px; }
   .fcard p { font-size: 12.5px; color: var(--gray); line-height: 1.5; margin: 0; }
 
   /* How it works */
-  .how-section { margin-bottom: 56px; }
   .how-title { font-size: 26px; font-weight: 800; margin-bottom: 24px; }
-  .steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
-  .step-card { position: relative; }
+  .steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .step-num {
-    width: 26px; height: 26px; border-radius: 999px; border: 1.5px solid var(--blue); color: var(--blue);
+    width: 26px; height: 26px; border-radius: 999px; border: 1.5px solid var(--orange); color: var(--orange);
     display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-bottom: 12px;
   }
   .step-card h4 { font-size: 14px; font-weight: 700; margin: 0 0 6px; }
@@ -102,20 +119,20 @@
 
   /* Bottom pricing/waitlist */
   .bottom-card {
-    background: white; border-radius: 18px; box-shadow: 0 6px 24px rgba(20,22,27,0.06);
+    background: #FAFAFB; border: 1px solid var(--line); border-radius: 18px;
     display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; margin-bottom: 26px;
   }
   .bottom-half { padding: 32px 34px; }
   .bottom-half.left { border-right: 1px solid var(--line); }
   .bottom-half h3 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
   .bottom-half .note { font-size: 12.5px; color: var(--gray); margin-bottom: 16px; }
-  .price-row { display: flex; align-items: center; gap: 16px; }
+  .price-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .price { font-size: 34px; font-weight: 800; }
   .price span { font-size: 13px; color: var(--gray); font-weight: 500; }
   .waitlist-form { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
   .waitlist-form input {
-    flex: 1; min-width: 180px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
-    background: #FAFAFB; font-family: 'Inter', sans-serif; font-size: 14px;
+    flex: 1; min-width: 180px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line);
+    background: white; font-family: 'Inter', sans-serif; font-size: 14px;
   }
   .waitlist-form input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
   .confirm { font-size: 13px; color: var(--teal); margin-top: 10px; display: none; }
@@ -129,75 +146,87 @@
     .steps-row { grid-template-columns: repeat(2, 1fr); }
     .bottom-card { grid-template-columns: 1fr; }
     .bottom-half.left { border-right: none; border-bottom: 1px solid var(--line); }
-    h1 { font-size: 32px; }
-    .hero-deco { display: none; }
+    h1 { font-size: 34px; }
+    .nav-links { display: none; }
+    .nav-right .btn-secondary { display: none; }
+    .stats { gap: 24px; }
   }
 </style>
 </head>
 <body>
 
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="nav-left">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+          Xenkloud <span class="badge">Pulse</span>
+        </div>
+        <div class="nav-links">
+          <a href="#how">Product</a>
+          <a href="#waitlist">Pricing</a>
+          <div class="dropdown">
+            <a>Resources
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/docs" class="dropdown-item">
+                <div class="di-icon" style="background:#EAF2FF;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke="#3B82F6" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 8h6M11 12h6M11 16h4" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </div>
+                <div>
+                  <div class="di-title">Docs</div>
+                  <div class="di-desc">Setup guides, API reference, and how Pulse detects anomalies.</div>
+                </div>
+              </a>
+              <a href="/whitepaper" class="dropdown-item">
+                <div class="di-icon" style="background:#F1ECFF;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" stroke="#8B5CF6" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12v8M12 12 3 7M12 12l9-5" stroke="#8B5CF6" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div class="di-title">Whitepaper</div>
+                  <div class="di-desc">Why unmonitored cloud spend quietly costs small teams thousands.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a href="#how" class="btn btn-secondary">See how it works</a>
+        <a href="#waitlist" class="btn btn-primary">Get early access</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Know exactly where<br/>your <span class="grad">cloud bill</span> is<br/>actually going.</h1>
+      <p class="sub">Xenkloud Pulse tracks your AWS spend complexity, catches cost spikes before the invoice lands, and tells you exactly what to fix — in plain English, not a spreadsheet.</p>
+      <div class="cta-row">
+        <a href="#waitlist" class="btn btn-primary">Get early access</a>
+        <a href="#how" class="btn btn-secondary">See how it works</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#14161B" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="#14161B" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div><b>5 min</b><span>setup, read-only access</span></div>
+        </div>
+        <div class="stat">
+          <div class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.3-5 3 2.2 2.6 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3" stroke="#14161B" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div><b>$0</b><span>until you connect cloud</span></div>
+        </div>
+        <div class="stat">
+          <div class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 12l-8 8-9-9V4h7l10 8Z" stroke="#14161B" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="7.5" r="1.2" fill="#14161B"/></svg></div>
+          <div><b>&lt; $50</b><span>typical monthly savings</span></div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
 <div class="wrap">
-  <nav>
-    <div class="logo">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#3B82F6" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      Xenkloud <span class="badge">Pulse</span>
-    </div>
-    <a href="#waitlist" class="btn btn-primary">Get early access</a>
-  </nav>
-
-  <header class="hero">
-    <div class="hero-deco left">
-      <svg width="100%" height="100%" viewBox="0 0 150 100" preserveAspectRatio="xMidYMid meet">
-        <polyline points="10,55 35,45 55,60 78,30 100,38 125,15" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="125" cy="15" r="3.5" fill="#3B82F6"/>
-        <rect x="15" y="70" width="14" height="20" rx="2" fill="#DCE9FE"/>
-        <rect x="35" y="60" width="14" height="30" rx="2" fill="#BFDBFE"/>
-        <rect x="55" y="50" width="14" height="40" rx="2" fill="#93C5FD"/>
-        <rect x="75" y="65" width="14" height="25" rx="2" fill="#BFDBFE"/>
-      </svg>
-    </div>
-    <div class="hero-deco right">
-      <svg width="100%" height="100%" viewBox="0 0 150 100" preserveAspectRatio="xMidYMid meet">
-        <circle cx="55" cy="50" r="32" fill="none" stroke="#E5EAF2" stroke-width="14"/>
-        <circle cx="55" cy="50" r="32" fill="none" stroke="#3B82F6" stroke-width="14"
-                stroke-dasharray="120 201" stroke-linecap="round" transform="rotate(-90 55 50)"/>
-        <circle cx="55" cy="50" r="32" fill="none" stroke="#14B8A6" stroke-width="14"
-                stroke-dasharray="60 201" stroke-dashoffset="-120" stroke-linecap="round" transform="rotate(-90 55 50)"/>
-        <rect x="100" y="28" width="38" height="7" rx="3.5" fill="#E5EAF2"/>
-        <rect x="100" y="45" width="30" height="7" rx="3.5" fill="#E5EAF2"/>
-        <rect x="100" y="62" width="34" height="7" rx="3.5" fill="#E5EAF2"/>
-      </svg>
-    </div>
-    <h1>Know exactly where<br/>your <span class="grad">cloud bill</span> is<br/>actually going.</h1>
-    <p class="sub">Xenkloud Pulse tracks your AWS spend complexity, catches cost spikes before the invoice lands, and tells you exactly what to fix — in plain English, not a spreadsheet.</p>
-    <div class="cta-row">
-      <a href="#waitlist" class="btn btn-primary">Get early access</a>
-      <a href="#how" class="btn btn-secondary">See how it works</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="icon" style="background:#EAF2FF;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#3B82F6" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div><b>5 min</b><span>setup, read-only access</span></div>
-      </div>
-      <div class="stat">
-        <div class="icon" style="background:#E9FBF6;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.3-5 3 2.2 2.6 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3" stroke="#14B8A6" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div><b>$0</b><span>until you connect cloud</span></div>
-      </div>
-      <div class="stat">
-        <div class="icon" style="background:#F1ECFF;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 12l-8 8-9-9V4h7l10 8Z" stroke="#8B5CF6" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="7.5" r="1.2" fill="#8B5CF6"/></svg>
-        </div>
-        <div><b>&lt; $50</b><span>typical monthly savings</span></div>
-      </div>
-    </div>
-  </header>
-
-  <section class="problem-grid">
+  <section class="content-section problem-grid">
     <div>
       <h2>The gap nobody built a tool for</h2>
       <p>Overengineered platforms and raw invoices won't save you. Pulse is built for clarity. Plug in, we do the hard thinking, and show you what's actually costing you.</p>
@@ -225,8 +254,8 @@
         <p>Built for platform teams, not for you. Too complex, too heavy, too slow.</p>
       </div>
       <div class="fcard">
-        <div class="icon" style="background:#FFF6E3;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="#F0A83B" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <div class="icon" style="background:#FFF1E6;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="#DD7A33" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </div>
         <h3>You see. We fix.</h3>
         <p>Fix what matters. Cut waste. Keep growth on track.</p>
@@ -234,7 +263,7 @@
     </div>
   </section>
 
-  <section class="how-section" id="how">
+  <section class="content-section" id="how" style="padding-top:0;">
     <div class="how-title">How it works</div>
     <div class="steps-row">
       <div class="step-card">
@@ -260,23 +289,25 @@
     </div>
   </section>
 
-  <section class="bottom-card" id="waitlist">
-    <div class="bottom-half left">
-      <h3>Early access pricing</h3>
-      <div class="note">Lock in for life in the first 250 founders.</div>
-      <div class="price-row">
-        <div class="price">$29<span> /month</span></div>
-        <a href="#waitlist" class="btn btn-primary">Claim early access</a>
+  <section class="content-section" id="waitlist" style="padding-top:0;">
+    <div class="bottom-card">
+      <div class="bottom-half left">
+        <h3>Early access pricing</h3>
+        <div class="note">Lock in for life in the first 250 founders.</div>
+        <div class="price-row">
+          <div class="price">$29<span> /month</span></div>
+          <a href="#waitlist" class="btn btn-primary">Claim early access</a>
+        </div>
       </div>
-    </div>
-    <div class="bottom-half">
-      <h3>Get early access</h3>
-      <div class="note">Join the waitlist now to be first to get Pulse alerts and launch pricing.</div>
-      <form class="waitlist-form" onsubmit="event.preventDefault(); document.getElementById('confirm').style.display='block'; this.reset();">
-        <input type="email" placeholder="you@company.com" required />
-        <button class="btn btn-primary" type="submit">Join waitlist</button>
-      </form>
-      <div class="confirm" id="confirm">You're on the list — we'll be in touch soon.</div>
+      <div class="bottom-half">
+        <h3>Get early access</h3>
+        <div class="note">Join the waitlist now to be first to get Pulse alerts and launch pricing.</div>
+        <form class="waitlist-form" onsubmit="event.preventDefault(); document.getElementById('confirm').style.display='block'; this.reset();">
+          <input type="email" placeholder="you@company.com" required />
+          <button class="btn btn-primary" type="submit">Join waitlist</button>
+        </form>
+        <div class="confirm" id="confirm">You're on the list — we'll be in touch soon.</div>
+      </div>
     </div>
   </section>
 
