@@ -6,6 +6,7 @@
 <title>Xenkloud Pulse — Know where your cloud bill is actually going</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
 
   :root {
     --ink: #14161B;
@@ -82,8 +83,9 @@
   /* Hero */
   header.hero { position: relative; padding: 56px 0 30px; text-align: center; }
   h1 {
-    font-size: 50px; font-weight: 800; line-height: 1.12; letter-spacing: -1px; margin: 0 0 20px;
-    color: var(--ink);
+    font-family: 'General Sans', 'Inter', sans-serif;
+    font-size: clamp(38px, 6vw, 80px); font-weight: 600; line-height: 1.05; letter-spacing: -2px;
+    margin: 0 0 22px; color: var(--ink); max-width: 780px; margin-left: auto; margin-right: auto;
   }
   h1 .grad { background: linear-gradient(90deg, var(--blue), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .sub { font-size: 16.5px; color: var(--gray); max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
@@ -200,7 +202,7 @@
     </nav>
 
     <header class="hero">
-      <h1>Know exactly where<br/>your <span class="grad">cloud bill</span> is<br/>actually going.</h1>
+      <h1>Know exactly where your <span class="grad">cloud bill</span> is actually going.</h1>
       <p class="sub">Xenkloud Pulse tracks your AWS spend complexity, catches cost spikes before the invoice lands, and tells you exactly what to fix — in plain English, not a spreadsheet.</p>
       <div class="cta-row">
         <a href="#waitlist" class="btn btn-primary">Get early access</a>
@@ -218,7 +220,7 @@
         </div>
         <div class="stat">
           <div class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 12l-8 8-9-9V4h7l10 8Z" stroke="#14161B" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="7.5" r="1.2" fill="#14161B"/></svg></div>
-          <div><b>&lt; $50</b><span>typical monthly savings</span></div>
+          <div><b>15-30%</b><span>typical spend reduction</span></div>
         </div>
       </div>
     </header>
@@ -228,7 +230,7 @@
 <div class="wrap">
   <section class="content-section problem-grid">
     <div>
-      <h2>The gap nobody built a tool for</h2>
+      <h2>Built for founders who'd rather be shipping</h2>
       <p>Overengineered platforms and raw invoices won't save you. Pulse is built for clarity. Plug in, we do the hard thinking, and show you what's actually costing you.</p>
     </div>
     <div class="feature-cards">
