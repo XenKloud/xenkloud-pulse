@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why Unmonitored Cloud Spend Costs Small Teams Thousands — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+  :root {
+    --ink: #14161B; --gray: #5B5F6B; --gray-light: #9CA3AF; --line: #ECEDF1;
+    --orange: #DD7A33; --orange-hover: #C86A28; --blue: #3B82F6; --teal: #14B8A6;
+    --grad-a: #F4B8A6; --grad-b: #A9E1D2;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.7; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 40px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding: 26px 0 0; max-width:1180px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  .btn { font-weight:700; font-size:14px; padding:11px 20px; border-radius:999px; text-decoration:none; display:inline-block; }
+  .btn-primary { background:var(--orange); color:white; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding: 40px 24px 20px; max-width: 720px; margin: 0 auto; }
+  .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); opacity:0.6; margin-bottom:14px; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(28px, 4vw, 42px); font-weight:600; letter-spacing:-1px; line-height:1.2; margin:0 0 16px; }
+  .meta { color:var(--gray); font-size:14px; }
+  article { padding: 48px 0 80px; }
+  article h2 { font-family:'General Sans','Inter',sans-serif; font-size:24px; font-weight:700; margin: 44px 0 14px; letter-spacing:-0.3px; }
+  article p { font-size:16px; color:#2A2D34; margin: 0 0 18px; }
+  article ul { padding-left: 22px; }
+  article li { margin-bottom: 10px; font-size:16px; color:#2A2D34; }
+  .pullquote { border-left: 3px solid var(--orange); padding: 4px 0 4px 20px; margin: 28px 0; font-size:18px; font-weight:600; color:var(--ink); }
+  .cta-box { background:#FAFAFB; border:1px solid var(--line); border-radius:16px; padding:32px; text-align:center; margin-top:48px; }
+  .cta-box h3 { font-size:20px; margin:0 0 8px; }
+  .cta-box p { color:var(--gray); margin:0 0 20px; }
+  footer { text-align:center; padding: 20px 0 60px; color:var(--gray-light); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <nav>
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+      Xenkloud <span class="badge">Pulse</span>
+    </div>
+    <a href="index.html" class="back">← Back to Pulse</a>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">WHITEPAPER</div>
+    <h1>Why unmonitored cloud spend quietly costs small teams thousands</h1>
+    <div class="meta">A short read for founders and small engineering teams running on AWS.</div>
+  </header>
+</div>
+
+<div class="wrap">
+<article>
+  <p>Most small SaaS teams don't have a cloud cost problem because they're careless. They have one because nobody's job is to watch it. The founder is closing deals, the one engineer is shipping features, and the AWS bill just... happens, arriving as a number at the end of the month that everyone's mildly surprised by and nobody has time to actually investigate.</p>
+
+  <p>That gap — between "someone technically could check this" and "someone actually does, every week, carefully" — is where money quietly leaks out. Not through one dramatic mistake, but through a dozen small, boring ones that compound.</p>
+
+  <h2>Where the waste actually comes from</h2>
+  <p>It's rarely one big thing. It's usually several small, unglamorous things stacking up:</p>
+  <ul>
+    <li><strong>Orphaned resources.</strong> A test environment spun up for a demo, an EBS volume left behind after an instance was terminated, a load balancer nobody remembers creating — each one small, but they add up over months.</li>
+    <li><strong>Oversized instances.</strong> Teams provision for the traffic spike they're afraid of, not the traffic they actually have. An instance running at 8% average CPU is common, and it's paying for capacity that's never used.</li>
+    <li><strong>No one watching the trend line.</strong> Costs creep up 3-5% a month as new features ship. Nobody notices a single month's increase. Six months later it's a very noticeable number, and by then it feels too entangled with "how the product works" to easily unwind.</li>
+    <li><strong>Alerts that don't exist.</strong> Most teams find out about a cost spike when the invoice arrives — three to four weeks after it happened, long after the root cause (a bad deploy, a misconfigured job, a runaway loop) has been forgotten.</li>
+  </ul>
+
+  <div class="pullquote">The pattern isn't negligence. It's that watching cloud spend carefully is nobody's actual job at a small company — so it becomes nobody's job at all.</div>
+
+  <h2>Why "just build a script" doesn't fully solve it</h2>
+  <p>It's genuinely true that a founder can write a script to pull AWS Cost Explorer data in an afternoon, especially with AI tools helping. But writing the script once and maintaining it well are very different commitments. The real work isn't the first version — it's noticing six months later that a new service was added and the script never accounted for it, or that the anomaly threshold is too sensitive and everyone's learned to ignore the alerts, or that AWS changed an API and the script has been silently failing since March.</p>
+
+  <p>That ongoing attention is the part that rarely happens on its own — not because it's hard, but because it's never the most urgent thing on any given day, until the moment a cost spike actually hurts.</p>
+
+  <h2>What actually helps</h2>
+  <p>Three things, roughly in order of impact:</p>
+  <ul>
+    <li><strong>Someone (or something) looking at trends weekly, not just monthly.</strong> Catching a spike within days instead of a full billing cycle later is the single biggest lever — it turns "why did we spend $1,200 extra last month" into "what changed this week."</li>
+    <li><strong>A short, prioritized list of fixes, not a raw dashboard.</strong> Most cost tools show you data. Very few tell you what to actually do about it, in order of ease and impact. That translation from "here's a chart" to "delete these six volumes, save $74/month" is where the real time savings live.</li>
+    <li><strong>A budget pacing check, not just a final total.</strong> Knowing on day 12 of the month that you're already 40% through your budget is far more useful than finding out on day 31 that you went over.</li>
+  </ul>
+
+  <h2>Where Xenkloud Pulse fits</h2>
+  <p>This is exactly the gap Pulse is built for — not a replacement for enterprise FinOps platforms built for teams spending $50K+/month with a dedicated cost team, and not a call to just DIY it and hope it stays maintained. It's the middle ground: a small, focused tool that watches daily, flags what's unusual, and tells you plainly what to fix — built for teams who'd rather spend their attention on the product than on their own cloud bill.</p>
+
+  <div class="cta-box">
+    <h3>See it on your own account</h3>
+    <p>5-minute read-only setup. No commitment, no card required to look.</p>
+    <a href="index.html#waitlist" class="btn btn-primary">Get early access</a>
+  </div>
+</article>
+</div>
+
+<footer>Xenkloud Pulse — a Xenkloud product</footer>
+
+</body>
+</html>

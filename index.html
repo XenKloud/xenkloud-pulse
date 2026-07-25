@@ -184,7 +184,7 @@
         <div class="nav-links">
           <a href="#how">Product</a>
           <a href="#waitlist">Pricing</a>
-        <a href="#contact">Contact</a>
+        <a href="contact.html">Contact</a>
           <div class="dropdown">
             <a>Resources
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -199,7 +199,7 @@
                   <div class="di-desc">Setup guides, API reference, and how Pulse detects anomalies.</div>
                 </div>
               </a>
-              <a href="/whitepaper" class="dropdown-item">
+              <a href="whitepaper.html" class="dropdown-item">
                 <div class="di-icon" style="background:#F1ECFF;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" stroke="#8B5CF6" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12v8M12 12 3 7M12 12l9-5" stroke="#8B5CF6" stroke-width="1.6" stroke-linejoin="round"/></svg>
                 </div>
@@ -331,21 +331,6 @@
     </div>
   </section>
 
-  <section class="content-section" id="contact" style="padding-top:0;">
-    <div class="contact-card">
-      <h3>Get in touch</h3>
-      <div class="note">Questions before joining, or want a walkthrough first? Send us a message.</div>
-      <form class="contact-form" id="contact-form">
-        <input type="text" id="contact-name" placeholder="Your name" required />
-        <input type="email" id="contact-email" placeholder="you@company.com" required />
-        <textarea id="contact-message" placeholder="What's on your mind?" required></textarea>
-        <button class="btn btn-primary" type="submit" id="contact-submit">Send message</button>
-      </form>
-      <div class="confirm" id="contact-confirm" style="text-align:center; margin-top:14px;">Thanks — we'll get back to you soon.</div>
-      <div class="confirm" id="contact-error" style="text-align:center; margin-top:14px; color:#EF4444;"></div>
-    </div>
-  </section>
-
   <footer>
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="#9CA3AF" stroke-width="1.6"/><path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="#9CA3AF" stroke-width="1.6"/></svg>
     We respect your data. Read-only access. No changes. Ever.
@@ -353,9 +338,8 @@
 </div>
 
 <script>
-  // Xenkloud Pulse waitlist/contact API — live on Hostinger VPS
+  // Xenkloud Pulse waitlist API — live on Hostinger VPS
   const WAITLIST_API_URL = "https://api.xenkloud.com/api/waitlist";
-  const CONTACT_API_URL = "https://api.xenkloud.com/api/contact";
 
   const form = document.getElementById("waitlist-form");
   const emailInput = document.getElementById("waitlist-email");
@@ -390,46 +374,6 @@
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Join waitlist";
-    }
-  });
-
-  // Contact form
-  const contactForm = document.getElementById("contact-form");
-  const contactSubmit = document.getElementById("contact-submit");
-  const contactConfirm = document.getElementById("contact-confirm");
-  const contactError = document.getElementById("contact-error");
-
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    contactError.style.display = "none";
-    contactConfirm.style.display = "none";
-    contactSubmit.disabled = true;
-    contactSubmit.textContent = "Sending...";
-
-    try {
-      const res = await fetch(CONTACT_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: document.getElementById("contact-name").value.trim(),
-          email: document.getElementById("contact-email").value.trim(),
-          message: document.getElementById("contact-message").value.trim(),
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.detail || "Something went wrong. Please try again.");
-      }
-
-      contactConfirm.style.display = "block";
-      contactForm.reset();
-    } catch (err) {
-      contactError.textContent = err.message || "Something went wrong. Please try again.";
-      contactError.style.display = "block";
-    } finally {
-      contactSubmit.disabled = false;
-      contactSubmit.textContent = "Send message";
     }
   });
 </script>
