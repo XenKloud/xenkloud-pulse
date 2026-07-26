@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>You're in — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+  :root {
+    --ink:#14161B; --gray:#5B5F6B; --gray-light:#9CA3AF; --line:#ECEDF1;
+    --orange:#DD7A33; --orange-hover:#C86A28; --blue:#3B82F6; --teal:#14B8A6;
+    --grad-a:#F4B8A6; --grad-b:#A9E1D2;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.7; }
+  .wrap { max-width: 680px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 40px; }
+  nav { display:flex; align-items:center; padding:26px 0 0; max-width:680px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+
+  header.hero { padding: 36px 24px 10px; text-align:center; max-width:680px; margin:0 auto; }
+  .check { width:56px; height:56px; border-radius:999px; background:rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight:600; letter-spacing:-1px; margin:0 0 12px; }
+  .sub { color:var(--gray); font-size:16px; max-width:480px; margin:0 auto; }
+
+  .content-section { padding: 48px 0 80px; }
+  .step-card { background:#FAFAFB; border:1px solid var(--line); border-radius:16px; padding:26px; margin-bottom:16px; display:flex; gap:16px; }
+  .step-num { width:32px; height:32px; border-radius:999px; background:var(--orange); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; flex-shrink:0; }
+  .step-card h3 { font-size:16px; margin:0 0 6px; }
+  .step-card p { font-size:14px; color:var(--gray); margin:0; line-height:1.6; }
+  .step-card a { color:var(--blue); font-weight:600; text-decoration:none; }
+
+  .highlight-box { background:#FFF6EE; border:1px solid #F0D7BE; border-radius:14px; padding:20px 24px; margin: 28px 0; font-size:14px; color:#7A4A1E; }
+
+  footer { text-align:center; padding:10px 0 60px; color:var(--gray-light); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+        Xenkloud <span class="badge">Pulse</span>
+      </div>
+    </nav>
+    <header class="hero">
+      <div class="check">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#0F6E56" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1>You're in — here's what happens next</h1>
+      <p class="sub">Your subscription is active. Follow the three steps below to get your first cost report within 24 hours.</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="content-section">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Create a read-only AWS access key</h3>
+        <p>Takes about 5 minutes in your AWS console. We can never change, delete, or create anything in your account — read-only means read-only.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Send us your access key securely</h3>
+        <p>Reply to the confirmation email you'll receive shortly, or use the secure upload link included in it. Never send credentials in plain, unencrypted text if you can avoid it.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Get your first report within 24 hours</h3>
+        <p>We'll email you a PDF report — what you're spending, anything unusual, and specific ways to save money. Happy to walk through it live on a short call if useful.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      A detailed step-by-step AWS setup guide (with screenshots) is on its way to your inbox now. If you don't see it in a few minutes, check spam, or reach out at <strong>hello@xenkloud.com</strong>.
+    </div>
+  </section>
+
+  <footer>Xenkloud Pulse — a Xenkloud product</footer>
+</div>
+
+</body>
+</html>
