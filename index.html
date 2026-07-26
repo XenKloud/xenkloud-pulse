@@ -59,9 +59,11 @@
 
   .dropdown { position: relative; }
   .dropdown-menu {
-    display: none; position: absolute; top: calc(100% + 16px); left: -14px;
+    display: none; position: absolute; top: 100%; left: -14px; padding-top: 16px;
+  }
+  .dropdown-menu-inner {
     background: white; border-radius: 14px; box-shadow: 0 12px 32px rgba(20,22,27,0.14);
-    padding: 10px; width: 300px; border: 1px solid var(--line); z-index: 60;
+    padding: 10px; width: 300px; border: 1px solid var(--line);
   }
   .dropdown:hover .dropdown-menu { display: block; }
   .dropdown-item { display: flex; gap: 12px; padding: 10px; border-radius: 10px; text-decoration: none; color: var(--ink); }
@@ -190,6 +192,7 @@
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
               <a href="/docs" class="dropdown-item">
                 <div class="di-icon" style="background:#EAF2FF;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke="#3B82F6" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 8h6M11 12h6M11 16h4" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -208,6 +211,7 @@
                   <div class="di-desc">Why unmonitored cloud spend quietly costs small teams thousands.</div>
                 </div>
               </a>
+              </div>
             </div>
           </div>
         </div>
