@@ -96,6 +96,9 @@
         <label for="cred-secret">AWS Secret Access Key</label>
         <input type="text" id="cred-secret" class="mono" required />
 
+        <label for="cred-budget">Approximate monthly AWS budget (USD)</label>
+        <input type="number" id="cred-budget" placeholder="1000" min="1" step="1" />
+
         <label for="cred-notes">Anything we should know? (optional)</label>
         <textarea id="cred-notes" placeholder="e.g. this covers our staging and prod accounts"></textarea>
 
@@ -133,6 +136,7 @@
           client_email: document.getElementById("cred-email").value.trim(),
           access_key: document.getElementById("cred-access").value.trim(),
           secret_key: document.getElementById("cred-secret").value.trim(),
+          budget: parseFloat(document.getElementById("cred-budget").value) || 1000,
           notes: document.getElementById("cred-notes").value.trim(),
         }),
       });
