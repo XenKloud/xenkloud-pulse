@@ -15,30 +15,38 @@
   }
   * { box-sizing:border-box; }
   body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.65; }
-  .wrap { max-width: 720px; margin:0 auto; padding:0 24px; }
+  .wrap { max-width: 760px; margin:0 auto; padding:0 24px; }
   .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 40px; }
-  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:720px; margin:0 auto; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:760px; margin:0 auto; }
   .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
   .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
   a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
-  header.hero { padding: 40px 24px 10px; text-align:center; max-width:720px; margin:0 auto; }
+  header.hero { padding: 40px 24px 10px; text-align:center; max-width:760px; margin:0 auto; }
   .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); opacity:0.6; margin-bottom:14px; }
   h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight:600; letter-spacing:-1px; margin:0 0 14px; }
   .sub { color:var(--gray); font-size:15px; max-width:480px; margin:0 auto; }
 
   .content-section { padding: 48px 0 80px; }
 
-  .step-block { display:flex; gap:20px; margin-bottom: 40px; }
-  .step-illustration {
-    width:64px; height:64px; border-radius:16px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
+  .step-block { margin-bottom: 44px; }
+  .step-head { display:flex; align-items:center; gap:12px; margin-bottom: 10px; }
+  .step-num {
+    width:28px; height:28px; border-radius:999px; background:var(--ink); color:white;
+    font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .step-text h3 { font-size:16px; margin:0 0 6px; }
-  .step-text p { font-size:14px; color:var(--gray); margin:0 0 10px; }
-  .step-text .callout {
+  .step-head h3 { font-size:16px; margin:0; }
+  .step-block p { font-size:14px; color:var(--gray); margin:0 0 14px; }
+  .step-block .callout {
     background:#FAFAFB; border:1px solid var(--line); border-radius:10px;
-    padding:12px 14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#2A2D34;
+    padding:12px 14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#2A2D34; margin-bottom:14px;
   }
+  .step-block img {
+    width:100%; border-radius:12px; border:1px solid var(--line); box-shadow: 0 4px 16px rgba(20,22,27,0.06);
+  }
+  .img-caption { font-size:12px; color:var(--gray-light); margin-top:8px; text-align:center; }
+
+  .warn-box { background:#FDECEC; border:1px solid #F3C9C9; border-radius:14px; padding:20px 22px; margin: 32px 0; font-size:14px; color:#8A2E2E; }
+  .warn-box strong { display:block; margin-bottom:4px; font-size:14.5px; }
 
   .note-box { background:#FFF6EE; border:1px solid #F0D7BE; border-radius:14px; padding:20px 22px; margin: 32px 0; font-size:14px; color:#7A4A1E; }
 
@@ -61,7 +69,7 @@
   <header class="hero">
     <div class="eyebrow">DOCS · AWS SETUP GUIDE</div>
     <h1>Connecting your AWS account</h1>
-    <div class="sub">Five minutes, read-only access, no changes to your infrastructure.</div>
+    <div class="sub">Real screenshots from the actual AWS Console, step by step.</div>
   </header>
 </div>
 
@@ -69,59 +77,57 @@
 <article class="content-section">
 
   <div class="step-block">
-    <div class="step-illustration" style="background:#EAF2FF;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#3B82F6" stroke-width="1.8"/><path d="M3 8h18" stroke="#3B82F6" stroke-width="1.8"/><circle cx="6" cy="6" r="0.6" fill="#3B82F6"/></svg>
-    </div>
-    <div class="step-text">
-      <h3>1. Log in to the AWS Console</h3>
-      <p>Go to <strong>console.aws.amazon.com</strong> and log in with your usual admin account.</p>
-    </div>
+    <div class="step-head"><div class="step-num">1</div><h3>Go to IAM → Users</h3></div>
+    <p>Search "IAM" in the AWS Console top search bar, then click <strong>IAM users</strong> in the left sidebar. Click <strong>Create user</strong>.</p>
+    <img src="docs-images/step1-iam-users.png" alt="IAM Users page in AWS Console" />
   </div>
 
   <div class="step-block">
-    <div class="step-illustration" style="background:#F1ECFF;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="#8B5CF6" stroke-width="1.8"/><path d="M4 20c0-3.9 3.6-7 8-7s8 3.1 8 7" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </div>
-    <div class="step-text">
-      <h3>2. Open IAM → Users → Create user</h3>
-      <p>Search "IAM" in the top search bar. Under Users, click <strong>Create user</strong> and name it clearly:</p>
-      <div class="callout">xenkloud-pulse-readonly</div>
-    </div>
+    <div class="step-head"><div class="step-num">2</div><h3>Name the user</h3></div>
+    <p>Give it a clear name so it's obvious what this access is for. Leave "Provide user access to the AWS Management Console" unchecked — this user only needs programmatic access.</p>
+    <div class="callout">xenkloud-pulse-readonly</div>
+    <img src="docs-images/step2-user-details.png" alt="Specify user details step showing username entry" />
   </div>
 
   <div class="step-block">
-    <div class="step-illustration" style="background:#E1F5EE;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 12.5 11 15l4-6" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#0F6E56" stroke-width="1.8"/></svg>
-    </div>
-    <div class="step-text">
-      <h3>3. Attach read-only permissions</h3>
-      <p>Choose "Attach policies directly" and check these three:</p>
-      <div class="callout">ReadOnlyAccess (Billing) · AmazonEC2ReadOnlyAccess · CloudWatchReadOnlyAccess</div>
-    </div>
+    <div class="step-head"><div class="step-num">3</div><h3>Attach read-only permissions</h3></div>
+    <p>Choose <strong>"Attach policies directly."</strong> Search and check <strong>all three</strong> of these policies before clicking Next — it's easy to only add one and miss the others:</p>
+    <div class="callout">AWSBillingReadOnlyAccess<br/>AmazonEC2ReadOnlyAccess<br/>CloudWatchReadOnlyAccess</div>
+    <img src="docs-images/step3-permissions.png" alt="Set permissions screen with AWSBillingReadOnlyAccess checked" />
+    <div class="img-caption">Search "bill" for the first, then repeat the search for "ec2" and "cloudwatch" to add the other two before continuing.</div>
+  </div>
+
+  <div class="warn-box">
+    <strong>Double-check before moving on</strong>
+    Only <code>AWSBillingReadOnlyAccess</code> is shown checked here. Before clicking Next, make sure <code>AmazonEC2ReadOnlyAccess</code> and <code>CloudWatchReadOnlyAccess</code> are checked too — otherwise Pulse won't be able to see EC2/EBS resources or detect idle volumes. If you already created the user with only one policy attached, you can add the other two afterward from the user's <strong>Permissions</strong> tab → <strong>Add permissions</strong>.
   </div>
 
   <div class="step-block">
-    <div class="step-illustration" style="background:#FFF1E6;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="11" rx="2" stroke="#DD7A33" stroke-width="1.8"/><path d="M8 9V6a4 4 0 1 1 8 0v3" stroke="#DD7A33" stroke-width="1.8"/></svg>
-    </div>
-    <div class="step-text">
-      <h3>4. Generate an access key</h3>
-      <p>Open the new user → Security credentials tab → Create access key → choose "Third-party service." Copy both the <strong>Access key ID</strong> and <strong>Secret access key</strong> immediately — AWS only shows the secret once.</p>
-    </div>
+    <div class="step-head"><div class="step-num">4</div><h3>Confirm the user was created</h3></div>
+    <p>Review the summary and click <strong>Create user</strong>. You'll see a green confirmation banner.</p>
+    <img src="docs-images/step4-created.png" alt="User created successfully confirmation" />
   </div>
 
   <div class="step-block">
-    <div class="step-illustration" style="background:#FDECEC;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#EF4444" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/></svg>
-    </div>
-    <div class="step-text">
-      <h3>5. Send it to us securely</h3>
-      <p>Reply to your confirmation email with the keys, or use the secure upload link included in it. Avoid sending credentials in plain, unencrypted messages where possible.</p>
-    </div>
+    <div class="step-head"><div class="step-num">5</div><h3>Generate an access key</h3></div>
+    <p>Click into the new user → <strong>Security credentials</strong> tab → scroll to <strong>Access keys</strong> → click <strong>Create access key</strong>.</p>
+    <img src="docs-images/step5-security-tab.png" alt="Security credentials tab showing Access keys section" />
+  </div>
+
+  <div class="step-block">
+    <div class="step-head"><div class="step-num">6</div><h3>Copy both values immediately</h3></div>
+    <p>Choose "Third-party service" as the use case, skip the optional description, then copy the <strong>Access key ID</strong> and <strong>Secret access key</strong> right away — AWS only shows the secret once.</p>
+    <img src="docs-images/step6-access-keys-redacted.png" alt="Retrieve access keys screen (values redacted for security)" />
+    <div class="img-caption">Values redacted here for security — yours will show real values on this exact screen.</div>
+  </div>
+
+  <div class="warn-box">
+    <strong>Never screenshot this final screen</strong>
+    The Access key ID and Secret access key shown on this page are real, live credentials. Copy them directly using the copy icons, or download the .csv file — don't take a screenshot of this screen, since screenshots are easy to accidentally share, back up to cloud photo libraries, or leave sitting in a chat history.
   </div>
 
   <div class="note-box">
-    <strong>This guide is text-based by design for now</strong> — we're adding annotated screenshots of each AWS Console screen soon. If a written step is unclear, just email us and we'll walk you through it live.
+    Once you have both values, send them to us securely (reply to your confirmation email or use the secure upload link in it) — never paste them in plain, unencrypted chat.
   </div>
 
   <div class="cta-box">
