@@ -74,7 +74,7 @@
       <div>
         <h3>Send us your access key securely</h3>
         <p>Use the secure upload link below — it's encrypted immediately and never stored in plain text. Never send credentials over plain, unencrypted email or chat.</p>
-        <a href="secure-upload.html" class="btn btn-primary" style="display:inline-block; margin-top:8px;">Submit your access key securely →</a>
+        <a href="secure-upload.html" id="secure-upload-link" class="btn btn-primary" style="display:inline-block; margin-top:8px; opacity:0.6; pointer-events:none;">Preparing secure link...</a>
       </div>
     </div>
     <div class="step-card">
@@ -90,8 +90,53 @@
     </div>
   </section>
 
-  <footer>Xenkloud Pulse — a Xenkloud product &nbsp;·&nbsp; <a href="feedback.html" style="color:inherit;">Share feedback</a></footer>
+  <footer>Xenkloud Pulse — a Xenkloud product &nbsp;·&nbsp; <a href="feedback.html" style="color:inherit;">Share feedback</a> &nbsp;·&nbsp; <a href="terms.html" style="color:inherit;">Terms</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:inherit;">Privacy</a></footer>
 </div>
 
+<script>
+  // If Stripe redirected here with a session_id, look up the customer's
+  // email and pass it forward so secure-upload.html can be pre-filled
+  // and accurately linked — no manual email retyping/mismatch risk.
+  //
+  // IMPORTANT: the button stays disabled ("Preparing secure link...")
+  // until this lookup genuinely finishes, whether it succeeds or fails.
+  // Without this, a user clicking immediately on page load could navigate
+  // using the plain, unlinked URL before the fetch completes — which is
+  // exactly the bug that caused stripe_customer_id to never get captured.
+  (async () => {
+    const link = document.getElementById("secure-upload-link");
+
+    function enableLink(href, label) {
+      link.href = href;
+      link.textContent = label;
+      link.style.opacity = "1";
+      link.style.pointerEvents = "auto";
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+
+    if (!sessionId) {
+      // No session to look up (e.g. direct navigation) — just enable the plain link.
+      enableLink("secure-upload.html", "Submit your access key securely →");
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://api.xenkloud.com/api/stripe/session-info?session_id=${encodeURIComponent(sessionId)}`);
+      if (!res.ok) throw new Error("lookup failed");
+      const data = await res.json();
+
+      const linkParams = new URLSearchParams();
+      if (data.email) linkParams.set("email", data.email);
+      if (data.stripe_customer_id) linkParams.set("customer_id", data.stripe_customer_id);
+      enableLink(`secure-upload.html?${linkParams.toString()}`, "Submit your access key securely →");
+    } catch (e) {
+      // Lookup failed for any reason — still let them proceed with the plain link
+      // rather than leaving the button stuck disabled forever.
+      enableLink("secure-upload.html", "Submit your access key securely →");
+    }
+  })();
+</script>
 </body>
 </html>
