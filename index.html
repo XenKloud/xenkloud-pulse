@@ -64,6 +64,20 @@
   .nav-links a:hover { background: rgba(255,255,255,0.6); border-color: rgba(20,22,27,0.12); }
   .nav-right { display: flex; align-items: center; gap: 14px; }
 
+  .mobile-menu-btn { display: none; background: none; border: 1px solid rgba(20,22,27,0.15); border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+  .mobile-nav-panel {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 10px;
+    background: white; border-radius: 14px; box-shadow: 0 12px 32px rgba(20,22,27,0.14);
+    border: 1px solid var(--line); padding: 10px; z-index: 90;
+  }
+  .mobile-nav-panel.open { display: block; }
+  .mobile-nav-panel a {
+    display: block; padding: 12px 14px; border-radius: 10px; text-decoration: none;
+    color: var(--ink); font-weight: 600; font-size: 14.5px;
+  }
+  .mobile-nav-panel a:hover { background: #FAFAFB; }
+  .mobile-nav-panel .divider { height: 1px; background: var(--line); margin: 6px 4px; }
+
   .dropdown { position: relative; }
   .dropdown-menu {
     display: none; position: absolute; top: 100%; left: -14px; padding-top: 16px;
@@ -181,6 +195,7 @@
     h1 { font-size: 34px; }
     .nav-links { display: none; }
     .nav-right .btn-secondary { display: none; }
+    .mobile-menu-btn { display: block; }
     .stats { gap: 24px; }
   }
 </style>
@@ -189,7 +204,7 @@
 
 <div class="hero-band">
   <div class="wrap">
-    <nav>
+    <nav style="position:relative;">
       <div class="nav-left">
         <div class="logo">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="1" y="1" width="22" height="22" rx="6.5" fill="#DD7A33"/><path d="M5.5 12.5H8.3L10 8.3L12.5 16.7L14.5 12.5H18.5" stroke="#14161B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
@@ -231,8 +246,34 @@
       <div class="nav-right">
         <a href="#how" class="btn btn-secondary">See how it works</a>
         <a href="get-started.html" class="btn btn-primary">Get early access</a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#14161B" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="mobile-nav-panel" id="mobile-nav-panel">
+        <a href="#how">Product</a>
+        <a href="#waitlist">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="docs.html">Docs</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <div class="divider"></div>
+        <a href="#how">See how it works</a>
       </div>
     </nav>
+
+    <script>
+      const mobileBtn = document.getElementById("mobile-menu-btn");
+      const mobilePanel = document.getElementById("mobile-nav-panel");
+      mobileBtn.addEventListener("click", () => {
+        mobilePanel.classList.toggle("open");
+      });
+      document.addEventListener("click", (e) => {
+        if (!mobilePanel.contains(e.target) && !mobileBtn.contains(e.target)) {
+          mobilePanel.classList.remove("open");
+        }
+      });
+    </script>
 
     <header class="hero">
       <h1>Know exactly where your <span class="grad">cloud bill</span> is actually going.</h1>
