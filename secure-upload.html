@@ -92,7 +92,7 @@
         <label for="cred-name">Your name</label>
         <input type="text" id="cred-name" required />
 
-        <label for="cred-email">Your email <span style="font-weight:400; color:var(--gray); font-size:12.5px;">(where reports will be sent — edit if different from checkout)</span></label>
+        <label for="cred-email">Your email <span style="font-weight:400; color:var(--gray); font-size:12.5px;">(where reports will be sent)</span></label>
         <input type="email" id="cred-email" required />
 
         <label for="cred-access">AWS Access Key ID</label>
@@ -126,18 +126,12 @@
   const errorEl = document.getElementById("cred-error");
   const emailInput = document.getElementById("cred-email");
 
-  // If we arrived here from thank-you.html with a linked email/customer,
-  // pre-fill the email as a convenience — but leave it fully editable.
-  // The actual Stripe cancellation linkage relies on customer_id below,
-  // NOT on the email text matching, so locking this field was an
-  // unnecessary restriction that could block a real customer who wants
-  // reports sent to a different address than the one they checked out with.
+  // Customer ID is still captured from the linked checkout session (this is
+  // what makes automatic Stripe cancellation matching work) — but the email
+  // field is intentionally left blank for the customer to fill in themselves,
+  // regardless of what email they checked out with.
   const urlParams = new URLSearchParams(window.location.search);
-  const linkedEmail = urlParams.get("email");
   const linkedCustomerId = urlParams.get("customer_id");
-  if (linkedEmail) {
-    emailInput.value = linkedEmail;
-  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
