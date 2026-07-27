@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Secure Credential Upload — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+  :root {
+    --ink:#14161B; --gray:#5B5F6B; --gray-light:#9CA3AF; --line:#ECEDF1;
+    --orange:#DD7A33; --orange-hover:#C86A28; --blue:#3B82F6; --teal:#14B8A6;
+    --grad-a:#F4B8A6; --grad-b:#A9E1D2;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.6; }
+  .wrap { max-width: 600px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 36px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:600px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding: 32px 0 6px; text-align:center; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(24px, 3.4vw, 32px); font-weight:600; letter-spacing:-0.7px; margin:0 0 10px; }
+  .sub { color:var(--gray); font-size:14.5px; max-width:440px; margin:0 auto; }
+
+  .content-section { padding: 36px 0 70px; }
+
+  .security-note {
+    background:#E1F5EE; border:1px solid #B8E6D6; border-radius:14px; padding:18px 20px;
+    font-size:13.5px; color:#0F6E56; margin-bottom:24px; display:flex; gap:12px;
+  }
+
+  .form-card {
+    background:white; border:1px solid var(--line); border-radius:18px; padding:28px;
+    box-shadow: 0 4px 20px rgba(20,22,27,0.05);
+  }
+  .form-card label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; margin-top:16px; }
+  .form-card label:first-child { margin-top:0; }
+  .form-card input, .form-card textarea {
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line);
+    background:#FAFAFB; font-family:'IBM Plex Mono',monospace; font-size:13.5px;
+  }
+  .form-card input[type="text"]:not(.mono), .form-card input[type="email"] { font-family:'Inter',sans-serif; }
+  .form-card textarea { font-family:'Inter',sans-serif; min-height:70px; resize:vertical; }
+  .form-card input:focus, .form-card textarea:focus { outline:2px solid var(--blue); outline-offset:1px; }
+
+  .btn { font-weight:700; font-size:15px; padding:14px 28px; border-radius:999px; border:none; cursor:pointer; width:100%; margin-top:22px; background:var(--orange); color:white; }
+  .btn:hover { background:var(--orange-hover); }
+  .btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+  .confirm { font-size:14px; color:var(--teal); margin-top:16px; display:none; text-align:center; }
+  .error-msg { font-size:13px; color:#EF4444; margin-top:14px; display:none; text-align:center; }
+
+  footer { text-align:center; padding:20px 0 60px; color:var(--gray-light); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+        Xenkloud <span class="badge">Pulse</span>
+      </div>
+      <a href="index.html" class="back">← Back to Pulse</a>
+    </nav>
+    <header class="hero">
+      <h1>Secure credential upload</h1>
+      <p class="sub">Send your read-only AWS keys here instead of email or chat — encrypted immediately, never stored in plain text.</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="content-section">
+
+    <div class="security-note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><rect x="5" y="10" width="14" height="10" rx="2" stroke="#0F6E56" stroke-width="1.8"/><path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="#0F6E56" stroke-width="1.8"/></svg>
+      <div>Submitted over HTTPS and encrypted before it's ever saved to disk. Only encrypted values are stored — even we can't see them without the separate decryption key. We delete each submission once we've connected it.</div>
+    </div>
+
+    <div class="form-card">
+      <form id="cred-form">
+        <label for="cred-name">Your name</label>
+        <input type="text" id="cred-name" required />
+
+        <label for="cred-email">Your email</label>
+        <input type="email" id="cred-email" required />
+
+        <label for="cred-access">AWS Access Key ID</label>
+        <input type="text" id="cred-access" class="mono" placeholder="AKIA..." required />
+
+        <label for="cred-secret">AWS Secret Access Key</label>
+        <input type="text" id="cred-secret" class="mono" required />
+
+        <label for="cred-notes">Anything we should know? (optional)</label>
+        <textarea id="cred-notes" placeholder="e.g. this covers our staging and prod accounts"></textarea>
+
+        <button type="submit" class="btn" id="cred-submit">Submit securely</button>
+      </form>
+      <div class="confirm" id="cred-confirm">Received securely — we'll confirm once your account is connected, usually within 24 hours.</div>
+      <div class="error-msg" id="cred-error"></div>
+    </div>
+
+  </section>
+  <footer>Xenkloud Pulse — a Xenkloud product &nbsp;·&nbsp; <a href="feedback.html" style="color:inherit;">Share feedback</a></footer>
+</div>
+
+<script>
+  const CREDENTIALS_API_URL = "https://api.xenkloud.com/api/credentials";
+
+  const form = document.getElementById("cred-form");
+  const submitBtn = document.getElementById("cred-submit");
+  const confirmEl = document.getElementById("cred-confirm");
+  const errorEl = document.getElementById("cred-error");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.style.display = "none";
+    confirmEl.style.display = "none";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+      const res = await fetch(CREDENTIALS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_name: document.getElementById("cred-name").value.trim(),
+          client_email: document.getElementById("cred-email").value.trim(),
+          access_key: document.getElementById("cred-access").value.trim(),
+          secret_key: document.getElementById("cred-secret").value.trim(),
+          notes: document.getElementById("cred-notes").value.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.detail || "Something went wrong. Please try again or email us instead.");
+      }
+
+      confirmEl.style.display = "block";
+      form.reset();
+    } catch (err) {
+      errorEl.textContent = err.message || "Something went wrong. Please try again or email us instead.";
+      errorEl.style.display = "block";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit securely";
+    }
+  });
+</script>
+
+</body>
+</html>
