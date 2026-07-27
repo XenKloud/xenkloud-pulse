@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="logo-final.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terms of Service — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+  :root { --ink:#14161B; --gray:#5B5F6B; --line:#ECEDF1; --orange:#DD7A33; --blue:#3B82F6; --teal:#14B8A6; --grad-a:#F4B8A6; --grad-b:#A9E1D2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.7; }
+  .wrap { max-width: 720px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom:32px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:720px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding:36px 24px 8px; max-width:720px; margin:0 auto; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size:clamp(26px,3.6vw,36px); font-weight:600; letter-spacing:-0.8px; margin:0 0 10px; }
+  .meta { color:var(--gray); font-size:13px; }
+  article { padding:44px 0 80px; }
+  article h2 { font-family:'General Sans','Inter',sans-serif; font-size:19px; font-weight:700; margin:34px 0 10px; }
+  article p, article li { font-size:14.5px; color:#2A2D34; margin:0 0 12px; }
+  article ul { padding-left:20px; }
+  .legal-note { background:#FFF6EE; border:1px solid #F0D7BE; border-radius:14px; padding:18px 20px; font-size:13.5px; color:#7A4A1E; margin-bottom:30px; }
+  footer { text-align:center; padding:20px 0 60px; color:var(--gray); font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="logo"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="1" y="1" width="22" height="22" rx="6.5" fill="#DD7A33"/><path d="M5.5 12.5H8.3L10 8.3L12.5 16.7L14.5 12.5H18.5" stroke="#14161B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Xenkloud <span class="badge">Pulse</span></div>
+      <a href="index.html" class="back">← Back to Pulse</a>
+    </nav>
+    <header class="hero">
+      <h1>Terms of Service</h1>
+      <div class="meta">Last updated: July 27, 2026</div>
+    </header>
+  </div>
+</div>
+<div class="wrap">
+<article>
+
+  <div class="legal-note"><strong>Placeholder draft.</strong> Replace [Legal Entity Name], [Province/Jurisdiction], and [Company Address] below with your actual incorporated entity details, and have this reviewed by a lawyer before relying on it commercially.</div>
+
+  <p>These Terms of Service ("Terms") govern your use of Xenkloud Pulse (the "Service"), operated by [Legal Entity Name] ("Xenkloud," "we," "us"). By subscribing to or using the Service, you agree to these Terms.</p>
+
+  <h2>1. The Service</h2>
+  <p>Xenkloud Pulse monitors your AWS cloud spend using read-only credentials you provide, and delivers periodic reports identifying cost trends, anomalies, and savings recommendations. The Service does not modify, delete, or create resources in your cloud account.</p>
+
+  <h2>2. Your account and credentials</h2>
+  <ul>
+    <li>You are responsible for providing AWS credentials scoped to read-only access, as instructed in our setup guide.</li>
+    <li>You may revoke our access at any time by deactivating the associated AWS IAM user or access key on your end.</li>
+    <li>We store your credentials encrypted at rest and use them solely to generate your reports.</li>
+  </ul>
+
+  <h2>3. Subscription, billing, and cancellation</h2>
+  <ul>
+    <li>The Service is billed monthly in advance via our payment processor (Stripe). You may cancel at any time; cancellation takes effect at the end of the current billing period.</li>
+    <li>If you do not receive your first report within 48 hours of submitting valid credentials, or are not satisfied with it, contact us for a full refund of that period's charge.</li>
+    <li>We do not provide refunds for partial months after the first billing cycle, except at our discretion or as required by law.</li>
+  </ul>
+
+  <h2>4. Acceptable use</h2>
+  <p>You agree to provide only credentials you are authorized to share, and not to use the Service to monitor infrastructure you do not own or have explicit authorization to access.</p>
+
+  <h2>5. Disclaimer of warranties</h2>
+  <p>The Service is provided "as is" without warranties of any kind, express or implied. Cost estimates, savings recommendations, and anomaly detection are provided for informational purposes and should not be treated as guaranteed financial outcomes. You remain solely responsible for decisions made regarding your cloud infrastructure and spend.</p>
+
+  <h2>6. Limitation of liability</h2>
+  <p>To the maximum extent permitted by law, Xenkloud's total liability for any claim arising from your use of the Service is limited to the amount you paid us in the three (3) months preceding the claim. We are not liable for indirect, incidental, or consequential damages, including costs arising from actions taken or not taken based on our reports.</p>
+
+  <h2>7. Termination</h2>
+  <p>We may suspend or terminate your access if you violate these Terms, engage in fraudulent activity, or provide credentials you are not authorized to share. You may terminate at any time by cancelling your subscription.</p>
+
+  <h2>8. Changes to these Terms</h2>
+  <p>We may update these Terms from time to time. Continued use of the Service after changes take effect constitutes acceptance of the revised Terms.</p>
+
+  <h2>9. Governing law</h2>
+  <p>These Terms are governed by the laws of [Province/Jurisdiction], Canada, without regard to conflict of law principles.</p>
+
+  <h2>10. Contact</h2>
+  <p>Questions about these Terms can be sent to <strong>hello@xenkloud.com</strong>.</p>
+
+</article>
+</div>
+<footer>Xenkloud Pulse — a Xenkloud product</footer>
+</body>
+</html>

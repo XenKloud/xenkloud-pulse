@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="logo-final.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+  :root { --ink:#14161B; --gray:#5B5F6B; --line:#ECEDF1; --orange:#DD7A33; --blue:#3B82F6; --teal:#14B8A6; --grad-a:#F4B8A6; --grad-b:#A9E1D2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.7; }
+  .wrap { max-width: 720px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom:32px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:720px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding:36px 24px 8px; max-width:720px; margin:0 auto; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size:clamp(26px,3.6vw,36px); font-weight:600; letter-spacing:-0.8px; margin:0 0 10px; }
+  .meta { color:var(--gray); font-size:13px; }
+  article { padding:44px 0 80px; }
+  article h2 { font-family:'General Sans','Inter',sans-serif; font-size:19px; font-weight:700; margin:34px 0 10px; }
+  article p, article li { font-size:14.5px; color:#2A2D34; margin:0 0 12px; }
+  article ul { padding-left:20px; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:13.5px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-weight:700; background:#FAFAFB; }
+  .legal-note { background:#FFF6EE; border:1px solid #F0D7BE; border-radius:14px; padding:18px 20px; font-size:13.5px; color:#7A4A1E; margin-bottom:30px; }
+  footer { text-align:center; padding:20px 0 60px; color:var(--gray); font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="logo"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="1" y="1" width="22" height="22" rx="6.5" fill="#DD7A33"/><path d="M5.5 12.5H8.3L10 8.3L12.5 16.7L14.5 12.5H18.5" stroke="#14161B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Xenkloud <span class="badge">Pulse</span></div>
+      <a href="index.html" class="back">← Back to Pulse</a>
+    </nav>
+    <header class="hero">
+      <h1>Privacy Policy</h1>
+      <div class="meta">Last updated: July 27, 2026</div>
+    </header>
+  </div>
+</div>
+<div class="wrap">
+<article>
+
+  <div class="legal-note"><strong>Placeholder draft.</strong> Have this reviewed by a lawyer, particularly around Canadian privacy law (PIPEDA) and any applicable rules if you serve customers in the EU (GDPR) or California (CCPA) — obligations can differ by where your customers are located.</div>
+
+  <p>This Privacy Policy explains what information Xenkloud Pulse ("we," "us") collects, how we use it, and how we protect it.</p>
+
+  <h2>1. What we collect</h2>
+  <table>
+    <tr><th>Data</th><th>Why we collect it</th></tr>
+    <tr><td>Name and email address</td><td>To create your account, deliver reports, and communicate with you</td></tr>
+    <tr><td>AWS access key and secret key (read-only)</td><td>To retrieve your cloud cost and usage data</td></tr>
+    <tr><td>Payment information</td><td>Processed entirely by Stripe — we never see or store your card details</td></tr>
+    <tr><td>Approximate monthly budget</td><td>To calculate whether you're pacing on or over budget in your reports</td></tr>
+    <tr><td>Feedback and support messages</td><td>To improve the Service and respond to you</td></tr>
+  </table>
+
+  <h2>2. How we protect AWS credentials specifically</h2>
+  <ul>
+    <li>Credentials are encrypted before being stored, using industry-standard symmetric encryption.</li>
+    <li>Only automated processes required to generate your reports access the decrypted values — not stored or transmitted in plain text at rest.</li>
+    <li>We request read-only access only. We never ask for or require credentials capable of modifying your infrastructure.</li>
+    <li>When you cancel your subscription, we deactivate further processing and delete your stored credentials within [30] days upon request.</li>
+  </ul>
+
+  <h2>3. How we use your information</h2>
+  <p>We use your information solely to operate the Service: generating and delivering your reports, processing payment via Stripe, responding to support requests, and improving the product based on feedback. We do not sell your data to third parties.</p>
+
+  <h2>4. Third parties we rely on</h2>
+  <ul>
+    <li><strong>Stripe</strong> — payment processing. See Stripe's own privacy policy for how they handle payment data.</li>
+    <li><strong>Amazon Web Services (AWS)</strong> — your own cloud account, accessed via the read-only credentials you provide.</li>
+    <li><strong>Our email provider (IONOS)</strong> — used to deliver reports and respond to inquiries.</li>
+  </ul>
+
+  <h2>5. Data retention</h2>
+  <p>We retain your account information for as long as you remain subscribed, and for a reasonable period afterward for accounting and legal purposes. AWS credentials are deleted upon request following cancellation.</p>
+
+  <h2>6. Your rights</h2>
+  <p>You may request a copy of the personal information we hold about you, request corrections, or request deletion of your data, by emailing <strong>hello@xenkloud.com</strong>. We will respond within a reasonable timeframe.</p>
+
+  <h2>7. Changes to this policy</h2>
+  <p>We may update this policy from time to time. Material changes will be communicated by email or a notice on our website.</p>
+
+  <h2>8. Contact</h2>
+  <p>Questions about this policy can be sent to <strong>hello@xenkloud.com</strong>.</p>
+
+</article>
+</div>
+<footer>Xenkloud Pulse — a Xenkloud product</footer>
+</body>
+</html>
