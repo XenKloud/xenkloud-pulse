@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Feedback — Xenkloud Pulse</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+  :root {
+    --ink:#14161B; --gray:#5B5F6B; --gray-light:#9CA3AF; --line:#ECEDF1;
+    --orange:#DD7A33; --orange-hover:#C86A28; --blue:#3B82F6; --teal:#14B8A6;
+    --grad-a:#F4B8A6; --grad-b:#A9E1D2;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; }
+  .wrap { max-width: 1180px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 50px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding: 36px 0 6px; text-align:center; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(28px, 4vw, 42px); font-weight:600; letter-spacing:-1px; margin:0 0 12px; }
+  .sub { color:var(--gray); font-size:15px; max-width:460px; margin:0 auto; }
+
+  .content-section { padding: 48px 0 80px; }
+  .feedback-card { background:#FAFAFB; border:1px solid var(--line); border-radius:18px; padding:36px; max-width:560px; margin:0 auto; }
+
+  .rating-row { display:flex; gap:10px; justify-content:center; margin: 8px 0 26px; }
+  .rating-option {
+    flex:1; text-align:center; padding:14px 6px; border-radius:12px; border:1.5px solid var(--line);
+    background:white; cursor:pointer; font-size:13px; color:var(--gray); font-weight:600;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .rating-option:hover { border-color: var(--orange); }
+  .rating-option.selected { border-color: var(--orange); background:#FFF6EE; color:var(--ink); }
+  .rating-label { font-size:13px; font-weight:600; margin-bottom:10px; display:block; }
+
+  .feedback-form textarea, .feedback-form input {
+    padding:12px 16px; border-radius:10px; border:1px solid var(--line); background:white;
+    font-family:'Inter',sans-serif; font-size:14px; width:100%; margin-bottom:14px;
+  }
+  .feedback-form textarea { resize:vertical; min-height:120px; }
+  .feedback-form textarea:focus, .feedback-form input:focus { outline:2px solid var(--blue); outline-offset:1px; }
+
+  .btn { font-weight:700; font-size:14px; padding:12px 24px; border-radius:999px; border:none; cursor:pointer; text-decoration:none; display:inline-block; width:100%; text-align:center; }
+  .btn-primary { background:var(--orange); color:white; }
+  .btn-primary:hover { background:var(--orange-hover); }
+  .confirm { font-size:13px; color:var(--teal); margin-top:14px; display:none; text-align:center; }
+  .error-msg { font-size:13px; color:#EF4444; margin-top:14px; display:none; text-align:center; }
+
+  footer { text-align:center; padding:10px 0 60px; color:var(--gray-light); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+        Xenkloud <span class="badge">Pulse</span>
+      </div>
+      <a href="index.html" class="back">← Back to Pulse</a>
+    </nav>
+    <header class="hero">
+      <h1>How's it going so far?</h1>
+      <p class="sub">Two minutes, genuinely useful to us — tell us honestly, good or bad.</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="content-section">
+    <div class="feedback-card">
+      <form class="feedback-form" id="feedback-form">
+        <span class="rating-label">How likely are you to recommend Pulse to another founder?</span>
+        <div class="rating-row" id="rating-row">
+          <div class="rating-option" data-value="1">1</div>
+          <div class="rating-option" data-value="2">2</div>
+          <div class="rating-option" data-value="3">3</div>
+          <div class="rating-option" data-value="4">4</div>
+          <div class="rating-option" data-value="5">5</div>
+        </div>
+        <input type="email" id="feedback-email" placeholder="Your email (optional)" />
+        <textarea id="feedback-message" placeholder="What's working, what's not, what would make this better?" required></textarea>
+        <button class="btn btn-primary" type="submit" id="feedback-submit">Send feedback</button>
+      </form>
+      <div class="confirm" id="feedback-confirm">Thank you — genuinely appreciated.</div>
+      <div class="error-msg" id="feedback-error"></div>
+    </div>
+  </section>
+  <footer>Xenkloud Pulse — a Xenkloud product</footer>
+</div>
+
+<script>
+  const FEEDBACK_API_URL = "https://api.xenkloud.com/api/feedback";
+  let selectedRating = null;
+
+  document.querySelectorAll(".rating-option").forEach((el) => {
+    el.addEventListener("click", () => {
+      document.querySelectorAll(".rating-option").forEach((o) => o.classList.remove("selected"));
+      el.classList.add("selected");
+      selectedRating = el.dataset.value;
+    });
+  });
+
+  const form = document.getElementById("feedback-form");
+  const submitBtn = document.getElementById("feedback-submit");
+  const confirmEl = document.getElementById("feedback-confirm");
+  const errorEl = document.getElementById("feedback-error");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.style.display = "none";
+    confirmEl.style.display = "none";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      const res = await fetch(FEEDBACK_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          rating: selectedRating,
+          email: document.getElementById("feedback-email").value.trim(),
+          message: document.getElementById("feedback-message").value.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.detail || "Something went wrong. Please try again.");
+      }
+
+      confirmEl.style.display = "block";
+      form.reset();
+      document.querySelectorAll(".rating-option").forEach((o) => o.classList.remove("selected"));
+      selectedRating = null;
+    } catch (err) {
+      errorEl.textContent = err.message || "Something went wrong. Please try again.";
+      errorEl.style.display = "block";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send feedback";
+    }
+  });
+</script>
+
+</body>
+</html>
