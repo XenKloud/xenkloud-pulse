@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Setup Guide — Xenkloud Pulse Docs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+  :root {
+    --ink:#14161B; --gray:#5B5F6B; --gray-light:#9CA3AF; --line:#ECEDF1;
+    --orange:#DD7A33; --orange-hover:#C86A28; --blue:#3B82F6; --teal:#14B8A6;
+    --grad-a:#F4B8A6; --grad-b:#A9E1D2;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:#fff; line-height:1.65; }
+  .wrap { max-width: 720px; margin:0 auto; padding:0 24px; }
+  .hero-band { background: linear-gradient(135deg, var(--grad-a) 0%, #F6D9C9 30%, #E7F0E9 60%, var(--grad-b) 100%); padding-bottom: 40px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 0 0; max-width:720px; margin:0 auto; }
+  .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; }
+  .logo .badge { background:rgba(255,255,255,0.6); font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  a.back { color:var(--ink); opacity:0.75; text-decoration:none; font-size:14px; }
+  header.hero { padding: 40px 24px 10px; text-align:center; max-width:720px; margin:0 auto; }
+  .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); opacity:0.6; margin-bottom:14px; }
+  h1 { font-family:'General Sans','Inter',sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight:600; letter-spacing:-1px; margin:0 0 14px; }
+  .sub { color:var(--gray); font-size:15px; max-width:480px; margin:0 auto; }
+
+  .content-section { padding: 48px 0 80px; }
+
+  .step-block { display:flex; gap:20px; margin-bottom: 40px; }
+  .step-illustration {
+    width:64px; height:64px; border-radius:16px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-text h3 { font-size:16px; margin:0 0 6px; }
+  .step-text p { font-size:14px; color:var(--gray); margin:0 0 10px; }
+  .step-text .callout {
+    background:#FAFAFB; border:1px solid var(--line); border-radius:10px;
+    padding:12px 14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#2A2D34;
+  }
+
+  .note-box { background:#FFF6EE; border:1px solid #F0D7BE; border-radius:14px; padding:20px 22px; margin: 32px 0; font-size:14px; color:#7A4A1E; }
+
+  .cta-box { background:#FAFAFB; border:1px solid var(--line); border-radius:16px; padding:32px; text-align:center; margin-top:48px; }
+  .btn { font-weight:700; font-size:14px; padding:12px 24px; border-radius:999px; text-decoration:none; display:inline-block; background:var(--orange); color:white; }
+
+  footer { text-align:center; padding: 20px 0 60px; color:var(--gray-light); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+  <nav>
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 1 1 .6-7.96A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7Z" stroke="#14161B" stroke-width="1.9" stroke-linejoin="round"/></svg>
+      Xenkloud <span class="badge">Pulse</span>
+    </div>
+    <a href="index.html" class="back">← Back to Pulse</a>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">DOCS · AWS SETUP GUIDE</div>
+    <h1>Connecting your AWS account</h1>
+    <div class="sub">Five minutes, read-only access, no changes to your infrastructure.</div>
+  </header>
+</div>
+
+<div class="wrap">
+<article class="content-section">
+
+  <div class="step-block">
+    <div class="step-illustration" style="background:#EAF2FF;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#3B82F6" stroke-width="1.8"/><path d="M3 8h18" stroke="#3B82F6" stroke-width="1.8"/><circle cx="6" cy="6" r="0.6" fill="#3B82F6"/></svg>
+    </div>
+    <div class="step-text">
+      <h3>1. Log in to the AWS Console</h3>
+      <p>Go to <strong>console.aws.amazon.com</strong> and log in with your usual admin account.</p>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-illustration" style="background:#F1ECFF;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="#8B5CF6" stroke-width="1.8"/><path d="M4 20c0-3.9 3.6-7 8-7s8 3.1 8 7" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="step-text">
+      <h3>2. Open IAM → Users → Create user</h3>
+      <p>Search "IAM" in the top search bar. Under Users, click <strong>Create user</strong> and name it clearly:</p>
+      <div class="callout">xenkloud-pulse-readonly</div>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-illustration" style="background:#E1F5EE;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 12.5 11 15l4-6" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#0F6E56" stroke-width="1.8"/></svg>
+    </div>
+    <div class="step-text">
+      <h3>3. Attach read-only permissions</h3>
+      <p>Choose "Attach policies directly" and check these three:</p>
+      <div class="callout">ReadOnlyAccess (Billing) · AmazonEC2ReadOnlyAccess · CloudWatchReadOnlyAccess</div>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-illustration" style="background:#FFF1E6;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="11" rx="2" stroke="#DD7A33" stroke-width="1.8"/><path d="M8 9V6a4 4 0 1 1 8 0v3" stroke="#DD7A33" stroke-width="1.8"/></svg>
+    </div>
+    <div class="step-text">
+      <h3>4. Generate an access key</h3>
+      <p>Open the new user → Security credentials tab → Create access key → choose "Third-party service." Copy both the <strong>Access key ID</strong> and <strong>Secret access key</strong> immediately — AWS only shows the secret once.</p>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-illustration" style="background:#FDECEC;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#EF4444" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </div>
+    <div class="step-text">
+      <h3>5. Send it to us securely</h3>
+      <p>Reply to your confirmation email with the keys, or use the secure upload link included in it. Avoid sending credentials in plain, unencrypted messages where possible.</p>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>This guide is text-based by design for now</strong> — we're adding annotated screenshots of each AWS Console screen soon. If a written step is unclear, just email us and we'll walk you through it live.
+  </div>
+
+  <div class="cta-box">
+    <h3 style="margin:0 0 8px; font-size:18px;">Questions about any step?</h3>
+    <p style="color:var(--gray); margin:0 0 20px; font-size:14px;">Happy to walk through this live on a short call.</p>
+    <a href="contact.html" class="btn">Contact us</a>
+  </div>
+
+</article>
+</div>
+
+<footer>Xenkloud Pulse — a Xenkloud product &nbsp;·&nbsp; <a href="feedback.html" style="color:inherit;">Share feedback</a></footer>
+
+</body>
+</html>
